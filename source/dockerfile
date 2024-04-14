@@ -1,0 +1,7 @@
+FROM python:3
+
+WORKDIR /test
+
+COPY . .
+
+CMD [ "python3", "game.py" ]
