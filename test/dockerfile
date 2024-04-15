@@ -1,9 +1,9 @@
 FROM python:3
 
-WORKDIR /test
+WORKDIR /snake-game
 
 COPY . .
 
 RUN pip install pytest
 
-CMD [ "pytest" ]
+CMD [ "python3", "-m", "pytest" ]
