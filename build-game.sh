@@ -1,2 +1,2 @@
 #! /bin/env bash
-docker build -f ./source/dockerfile -t snake ./source
+docker build -f ./dockerfile -t snake-game .

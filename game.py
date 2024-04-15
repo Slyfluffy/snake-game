@@ -1,6 +1,6 @@
 '''Snake Game. Contains everything needed to run Snake'''
 
-from snake import Snake
+from source.snake import Snake
 
 def test_game():
     '''test function'''
