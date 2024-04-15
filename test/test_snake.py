@@ -5,8 +5,8 @@ from source.point import Point
 from source.snake import Snake
 
 class TestSnake:
-
     '''Contains all the tests for Snake'''
+
     def test_eat_size_1(self) -> None:
         '''Test the functionality of Snake.eat() from default size of 1'''
         # SETUP
@@ -38,6 +38,73 @@ class TestSnake:
         assert first_added.x == 0
         assert first_added.y == 0
 
+    def test_move_up(self) -> None:
+        '''Test the snake moving up'''
+        # SETUP
+        snake = Snake()
+        snake.is_alive = True
+
+        # EXERCISE
+        snake.move()
+
+        # VERIFY
+        p = snake.points.pop()
+        assert p.x == 0
+        assert p.y == 1
+
+    def test_move_down(self) -> None:
+        '''Test the snake moving moving down'''
+        # SETUP
+        snake = Snake()
+        snake.is_alive = True
+        snake.direction = Direction.DOWN
+
+        # EXERCISE
+        snake.move()
+
+        # VERIFY
+        p = snake.points.pop()
+        assert p.x == 0
+        assert p.y == -1
+
+    def test_move_left(self) -> None:
+        '''Test the snake moving moving left'''
+        # SETUP
+        snake = Snake()
+        snake.is_alive = True
+        snake.direction = Direction.LEFT
+
+        # EXERCISE
+        snake.move()
+
+        # VERIFY
+        p = snake.points.pop()
+        assert p.x == -1
+        assert p.y == 0
+
+    def test_move_right(self) -> None:
+        '''Test the snake moving moving right'''
+        # SETUP
+        snake = Snake()
+        snake.is_alive = True
+        snake.direction = Direction.RIGHT
+
+        # EXERCISE
+        snake.move()
+
+        # VERIFY
+        p = snake.points.pop()
+        assert p.x == 1
+        assert p.y == 0
+
+    def test_test(self) -> None:
+        '''template'''
+        # SETUP
+        # EXERCISE
+        # VERIFY
+
+class TestSnakeDirection:
+    '''Contains all the tests for Snake's change_direction class'''
     def test_change_direction_up_no_change(self) -> None:
         '''Test that snake makes no changes when set to up and trying to change to up'''
         # SETUP
@@ -241,69 +308,3 @@ class TestSnake:
 
         # VERIFY
         assert snake.direction == Direction.DOWN
-
-    def test_move_up(self) -> None:
-        '''Test the snake moving up'''
-        # SETUP
-        snake = Snake()
-        snake.is_alive = True
-
-        # EXERCISE
-        snake.move()
-
-        # VERIFY
-        p = snake.points.pop()
-        assert p.x == 0
-        assert p.y == 1
-
-    def test_move_down(self) -> None:
-        '''Test the snake moving moving down'''
-        # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.DOWN
-
-        # EXERCISE
-        snake.move()
-
-        # VERIFY
-        p = snake.points.pop()
-        assert p.x == 0
-        assert p.y == -1
-
-    def test_move_left(self) -> None:
-        '''Test the snake moving moving left'''
-        # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.LEFT
-
-        # EXERCISE
-        snake.move()
-
-        # VERIFY
-        p = snake.points.pop()
-        assert p.x == -1
-        assert p.y == 0
-
-    def test_move_right(self) -> None:
-        '''Test the snake moving moving right'''
-        # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.RIGHT
-
-        # EXERCISE
-        snake.move()
-
-        # VERIFY
-        p = snake.points.pop()
-        assert p.x == 1
-        assert p.y == 0
-
-    def test_test(self) -> None:
-        '''template'''
-        # SETUP
-        # EXERCISE
-        # VERIFY
-        pass
