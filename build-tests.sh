@@ -1,2 +1,2 @@
 #! /bin/env bash
-docker build -f ./test/dockerfile -t test .
+docker build -f ./test/test.Dockerfile -t test .
