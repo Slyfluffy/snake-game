@@ -105,7 +105,8 @@ class Game():
                                  pygame.Rect(pos.x, pos.y, 10, 10)
                 )
 
-            pygame.draw.rect(self.game_window, GameColor.WHITE, 
+            # Draw the fruit!
+            pygame.draw.rect(self.game_window, self.fruit.color, 
                              pygame.Rect(self.fruit.point.x, self.fruit.point.y, 10, 10)
             )
 
