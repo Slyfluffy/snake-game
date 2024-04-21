@@ -7,95 +7,79 @@ from source.snake import Snake
 class TestSnake:
     '''Contains all the tests for Snake'''
 
-    def test_eat_size_1(self) -> None:
-        '''Test the functionality of Snake.eat() from default size of 1'''
+    def test_eat_size_4(self) -> None:
+        '''Test the functionality of Snake.eat() from default size of 4'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        assert len(snake.points) == 1
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
+        assert len(snake.body) == 4
 
         # EXERCISE
-        snake.eat()
+        fruit_point = Point(0, 0)
+        snake.eat(fruit_point)
 
         # VERIFY
-        assert len(snake.points) == 2
-
-    def test_eat_size_max(self) -> None:
-        '''Test how the snake handles getting to max size'''
-        # SETUP
-        snake = Snake()
-        snake.is_alive = True
-
-        for i in range(0, 100):
-            point = Point(0, i)
-            snake.points.append(point)
-
-        # EXERCISE
-        snake.eat()
-
-        # VERIFY
-        first_added = snake.points.popleft()
-        assert first_added.x == 0
-        assert first_added.y == 0
+        assert len(snake.body) == 5
 
     def test_move_up(self) -> None:
         '''Test the snake moving up'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(100, 50)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
+        snake.direction = Direction.UP
 
         # EXERCISE
         snake.move()
 
         # VERIFY
-        p = snake.points.pop()
-        assert p.x == 0
-        assert p.y == 1
+        assert snake.position.x == 100
+        assert snake.position.y == 40
 
     def test_move_down(self) -> None:
         '''Test the snake moving moving down'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(100, 50)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.DOWN
 
         # EXERCISE
         snake.move()
 
         # VERIFY
-        p = snake.points.pop()
-        assert p.x == 0
-        assert p.y == -1
+        assert snake.position.x == 100
+        assert snake.position.y == 60
 
     def test_move_left(self) -> None:
         '''Test the snake moving moving left'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(100, 50)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.LEFT
 
         # EXERCISE
         snake.move()
 
         # VERIFY
-        p = snake.points.pop()
-        assert p.x == -1
-        assert p.y == 0
+        assert snake.position.x == 90
+        assert snake.position.y == 50
 
     def test_move_right(self) -> None:
         '''Test the snake moving moving right'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.RIGHT
+        position = Point(100, 50)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
 
         # EXERCISE
         snake.move()
 
         # VERIFY
-        p = snake.points.pop()
-        assert p.x == 1
-        assert p.y == 0
+        assert snake.position.x == 110
+        assert snake.position.y == 50
 
     def test_test(self) -> None:
         '''template'''
@@ -108,8 +92,10 @@ class TestSnakeDirection:
     def test_change_direction_up_no_change(self) -> None:
         '''Test that snake makes no changes when set to up and trying to change to up'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
+        snake.direction = Direction.UP
 
         # EXERCISE
         snake.change_direction(Direction.UP)
@@ -120,8 +106,10 @@ class TestSnakeDirection:
     def test_change_direction_up_no_change_down(self) -> None:
         '''Test that snake makes no changes when set to up and trying to change to down'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
+        snake.direction = Direction.UP
 
         # EXERCISE
         snake.change_direction(Direction.DOWN)
@@ -132,8 +120,10 @@ class TestSnakeDirection:
     def test_change_direction_up_change_left(self) -> None:
         '''Test that snake makes no changes when from up to left'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
+        snake.direction = Direction.UP
 
         # EXERCISE
         snake.change_direction(Direction.LEFT)
@@ -144,8 +134,10 @@ class TestSnakeDirection:
     def test_change_direction_up_change_right(self) -> None:
         '''Test that snake makes no changes when from up to right'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
+        snake.direction = Direction.UP
 
         # EXERCISE
         snake.change_direction(Direction.RIGHT)
@@ -156,8 +148,9 @@ class TestSnakeDirection:
     def test_change_direction_down_no_change(self) -> None:
         '''Test that snake makes no changes when set to down and trying to change to down'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.DOWN
 
         # EXERCISE
@@ -169,8 +162,9 @@ class TestSnakeDirection:
     def test_change_direction_down_no_change_up(self) -> None:
         '''Test that snake makes no changes when set to down and trying to change to up'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.DOWN
 
         # EXERCISE
@@ -182,8 +176,9 @@ class TestSnakeDirection:
     def test_change_direction_down_change_left(self) -> None:
         '''Test that snake makes no changes when from down to left'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.DOWN
 
         # EXERCISE
@@ -195,8 +190,9 @@ class TestSnakeDirection:
     def test_change_direction_down_change_right(self) -> None:
         '''Test that snake makes no changes when from down to right'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.DOWN
 
         # EXERCISE
@@ -208,8 +204,9 @@ class TestSnakeDirection:
     def test_change_direction_left_no_change(self) -> None:
         '''Test that snake makes no changes when set to left and trying to change to left'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.LEFT
 
         # EXERCISE
@@ -221,8 +218,9 @@ class TestSnakeDirection:
     def test_change_direction_left_no_change_right(self) -> None:
         '''Test that snake makes no changes when set to left and trying to change to right'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.LEFT
 
         # EXERCISE
@@ -234,8 +232,9 @@ class TestSnakeDirection:
     def test_change_direction_left_change_up(self) -> None:
         '''Test that snake makes no changes when from left to up'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.LEFT
 
         # EXERCISE
@@ -247,8 +246,9 @@ class TestSnakeDirection:
     def test_change_direction_left_change_down(self) -> None:
         '''Test that snake makes no changes when from left to down'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
         snake.direction = Direction.LEFT
 
         # EXERCISE
@@ -260,9 +260,9 @@ class TestSnakeDirection:
     def test_change_direction_right_no_change(self) -> None:
         '''Test that snake makes no changes when set to right and trying to change to right'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.RIGHT
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
 
         # EXERCISE
         snake.change_direction(Direction.RIGHT)
@@ -273,9 +273,9 @@ class TestSnakeDirection:
     def test_change_direction_right_no_change_left(self) -> None:
         '''Test that snake makes no changes when set to right and trying to change to left'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.RIGHT
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
 
         # EXERCISE
         snake.change_direction(Direction.LEFT)
@@ -286,9 +286,9 @@ class TestSnakeDirection:
     def test_change_direction_right_change_up(self) -> None:
         '''Test that snake makes no changes when from right to up'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.RIGHT
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
 
         # EXERCISE
         snake.change_direction(Direction.UP)
@@ -299,9 +299,9 @@ class TestSnakeDirection:
     def test_change_direction_right_change_down(self) -> None:
         '''Test that snake makes no changes when from right to down'''
         # SETUP
-        snake = Snake()
-        snake.is_alive = True
-        snake.direction = Direction.RIGHT
+        position = Point(0, 0)
+        body = [Point(0,0), Point(0,0), Point(0,0), Point(0,0)]
+        snake = Snake(position, body)
 
         # EXERCISE
         snake.change_direction(Direction.DOWN)

@@ -14,3 +14,6 @@ class Point():
 
     def __repr__(self) -> str:
         return f'({self.x}, {self.y})'
+    
+    def __eq__(self, value: object) -> bool:
+        return self.x == value.x and self.y == value.y
